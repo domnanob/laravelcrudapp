@@ -11,5 +11,9 @@
     <p><strong>Nationality:</strong> {{ $player->nation }}</p>
     <p><strong>ELO:</strong> {{ $player->elo }}</p>
     <a href="{{ route('players.index') }}">Back to Players</a>
+    <h1>Match History</h1>
+    <p><strong>Kills</strong> {{  }}</p>
+    <p><strong>Deaths</strong> {{  }}</p>
+    <p><strong>Assists</strong> {{  }}</p>
 </body>
 </html>
