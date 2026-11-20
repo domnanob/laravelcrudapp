@@ -11,5 +11,14 @@
     <p><strong>Nationality:</strong> {{ $player->nation }}</p>
     <p><strong>ELO:</strong> {{ $player->elo }}</p>
     <a href="{{ route('players.index') }}">Back to Players</a>
+
+    <h2>Match History</h2>
+    @foreach ($player->plays as $play)
+        <h2>Match Details: {{ $play->id }}</h2>
+        <p><strong>Kill:</strong> {{ $play->kills }}</p>
+        <p><strong>Deaths:</strong> {{ $play->deaths }}</p>
+        <p><strong>Assists:</strong> {{ $play->assists }}</p>
+    
+    @endforeach
 </body>
 </html>
