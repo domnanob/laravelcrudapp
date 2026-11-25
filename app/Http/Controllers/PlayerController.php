@@ -17,6 +17,10 @@ class PlayerController extends Controller
             'players' => Player::all()
         ]);
     }
+    public function indexapi() {
+        $players = Player::all();
+        return response()->json($players);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -42,6 +46,16 @@ class PlayerController extends Controller
         Player::create($request->all());
         return redirect()->route('players.index');
     }
+    public function storeapi(Request $request) {
+        $request->validate([
+            'name' => 'required',
+            'nation' => 'required|string|max:3',
+            'elo' => 'required|integer',
+        ]);
+
+        $player = Player::create($request->all());
+        return response()->json($player, 201);
+    }
 
     /**
      * Display the specified resource.
@@ -50,6 +64,9 @@ class PlayerController extends Controller
     {
         //
         return view('players.show', compact('player'));
+    }
+    public function showapi(Player $player) {
+        return response()->json($player);
     }
 
     /**
@@ -77,6 +94,18 @@ class PlayerController extends Controller
         return redirect()->route('players.index');
     }
 
+    public function updateapi(Request $request, Player $player)
+    {
+        $request->validate([
+            'name' => 'required',
+            'nation' => 'required|string|max:3',
+            'elo' => 'required|integer',
+        ]);
+
+        $player->update($request->all());
+        return response()->json($player);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
@@ -85,5 +114,11 @@ class PlayerController extends Controller
         //
         $player->delete();
         return redirect()->route('players.index');
+    }
+    public function destroyapi(Player $player)
+    {
+        //
+        $player->delete();
+        return response(null, 204);
     }
 }
